@@ -1,0 +1,53 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import CroppingOverlay from "@/components/Cropping/Overlay.tsx";
+import { Image } from "astro:assets";
+import { formatNumber } from "@/lib/utils";
+
+export async function getStaticPaths() {
+  const images = await Astro.glob("/src/assets/*").then((files: any[]) => {
+    return files.map((file) => file.default);
+  });
+
+  return images.map((image: any) => {
+    const number = parseInt(image.src.split("/").pop().split(".")[0]);
+    return {
+      params: {
+        number: formatNumber(number),
+      },
+      props: {
+        image: image,
+        next: formatNumber(number + 1),
+      },
+    };
+  });
+}
+
+const { number } = Astro.params;
+const { image, next } = Astro.props;
+---
+
+<BaseLayout pageTitle={`Cropping ${number}`}>
+  <div class="relative flex h-screen w-full items-center justify-center">
+    <Image src={image} alt="image" class="pointer-events-none select-none" />
+    <CroppingOverlay client:only image={image} next={next} number={number} />
+    <a
+      href={`/${next}`}
+      class="absolute bottom-0 right-0 bg-secondary bg-opacity-50 p-4 text-primary hover:bg-opacity-75"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="inline-block h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+      </svg>
+    </a>
+  </div>
+</BaseLayout>
