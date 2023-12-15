@@ -1,7 +1,7 @@
 {
   "extends": "astro/tsconfigs/base",
   "compilerOptions": {
-    "baseUrl": "/home/shalluv/image-cropping-tool",
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "src/*"

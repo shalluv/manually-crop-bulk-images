@@ -50,6 +50,9 @@
 4. Click the "Confirm" button to crop the image.
 5. Repeat these steps for all images.
 
+- Since the program is using the localStorage API, you can close the browser and continue later.
+- When you want to start over, click the "Reset" button.
+
 ## Limitations
 
 - The program only supports cropping images to a rectangle.
