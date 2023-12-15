@@ -10,6 +10,13 @@
 ## Get Started
 
 1. Clone this repository.
+
+   ```bash
+   git clone https://github.com/shalluv/manually-crop-bulk-images.git
+   ```
+
+   or download the zip file.
+
 2. Install dependencies.
 
    ```bash
